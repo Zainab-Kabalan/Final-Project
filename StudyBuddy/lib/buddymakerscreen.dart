@@ -13,24 +13,11 @@ void main(
 
 class Buddymakerscreen
     extends
-        StatefulWidget {
+        StatelessWidget {
   const Buddymakerscreen({
     super.key,
   });
 
-  @override
-  State<
-    Buddymakerscreen
-  >
-  createState() =>
-      _BuddymakerscreenState();
-}
-
-class _BuddymakerscreenState
-    extends
-        State<
-          Buddymakerscreen
-        > {
   @override
   Widget build(
     BuildContext
