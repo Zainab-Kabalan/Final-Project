@@ -1,0 +1,27 @@
+name: timer
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/base/body-base1.png
+    - assets/images/clothes/girl-clothes1.png
+    - assets/images/eyes/girl-eyes1.png
+    - assets/images/hair/base1.png
+    - assets/images/hair/front-hair1.png
+    - assets/images/accessories/ribbon-A1.png
