@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:timer/widgets/buddybuilder.dart';
 
-class MainApp
+class Timerclass
     extends
         StatefulWidget {
-  const MainApp({
+  const Timerclass({
     super.key,
   });
 
@@ -22,7 +23,7 @@ class MainApp
 class _timerapp
     extends
         State<
-          MainApp
+          Timerclass
         > {
   //strings
   String state =
@@ -248,12 +249,18 @@ class _timerapp
       body: Center(
         child: Column(
           children: [
+            SizedBox(
+              height:
+                  30,
+            ),
             Text(
               "$s : $secondsremaining ",
             ),
             Row(
               mainAxisAlignment:
                   MainAxisAlignment.center,
+              mainAxisSize:
+                  MainAxisSize.min,
               children: [
                 Visibility(
                   visible:
@@ -275,6 +282,11 @@ class _timerapp
                 ),
               ],
             ),
+            SizedBox(
+              height:
+                  100,
+            ),
+            Buddymakerscreen(),
           ],
         ),
       ),
