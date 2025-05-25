@@ -1,4 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:timer/models/FullbodyOfChoice.dart';
+import 'package:timer/models/assestsofbuddy.dart';
+import 'package:timer/studybuddydata/data.dart';
+
+void main(
+  List<String> args,
+) {
+  runApp(
+    MaterialApp(
+      home:
+          Buddymakerscreen(),
+    ),
+  );
+}
 
 class Buddymakerscreen
     extends
@@ -12,6 +26,9 @@ class Buddymakerscreen
     BuildContext
     context,
   ) {
+    Fullbodyofchoice
+    body =
+        fullbody[0];
     return Stack(
       children: [
         Image.asset(
@@ -28,7 +45,10 @@ class Buddymakerscreen
                   .contain,
         ),
         Image.asset(
-          'assets/images/base/body-base1.png',
+          body
+              .buddyskin[Assestsofbuddy
+                  .skin]![0]
+              .skin[0],
           filterQuality:
               FilterQuality
                   .none,
@@ -41,7 +61,10 @@ class Buddymakerscreen
                   .contain,
         ),
         Image.asset(
-          'assets/images/clothes/girl-clothes1.png',
+          body
+              .buddyclothes[Assestsofbuddy
+                  .clothes]![0]
+              .clothes[1],
           height:
               200,
           width:

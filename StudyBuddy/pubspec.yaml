@@ -19,8 +19,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/base/body-base1.png
-    - assets/images/clothes/girl-clothes1.png
+    - assets/images/base/skin-1.png
+    - assets/images/base/skin-2.png
+    - assets/images/base/skin-3.png
+    - assets/images/clothes/clothes-1.png
+    - assets/images/clothes/clothes-2.png
+    - assets/images/clothes/clothes-3.png
+    - assets/images/clothes/clothes-4.png
     - assets/images/eyes/girl-eyes1.png
     - assets/images/hair/base1.png
     - assets/images/hair/front-hair1.png
