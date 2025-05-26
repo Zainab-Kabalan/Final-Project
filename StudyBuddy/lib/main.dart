@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timer/widgets/bodyofchoice.dart';
 import 'package:timer/widgets/timerclass.dart';
 
 void main(
@@ -7,7 +8,7 @@ void main(
   runApp(
     MaterialApp(
       home:
-          Timerclass(),
+          Bodyofchoice(),
     ),
   );
 }

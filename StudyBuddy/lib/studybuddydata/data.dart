@@ -17,6 +17,7 @@ fullbody = [
           .clothes: [
         Clothes(
           clothes: [
+            "assets/images/default.png",
             "assets/images/clothes/clothes-1.png",
             "assets/images/clothes/clothes-2.png",
             "assets/images/clothes/clothes-3.png",
@@ -42,7 +43,8 @@ fullbody = [
           .eyes: [
         Eyes(
           eyes: [
-            "assets/images/eyes/girl-eyes1.png",
+            "assets/images/eyes/eyes-0.png",
+            "assets/images/eyes/eyes-1.png",
           ],
         ),
       ],
@@ -52,6 +54,7 @@ fullbody = [
           .accessories: [
         Accesories(
           accesories: [
+            "assets/images/default.png",
             "assets/images/accessories/ribbon-A1.png",
           ],
         ),
@@ -62,6 +65,7 @@ fullbody = [
           .backhair: [
         Backhair(
           backhair: [
+            "assets/images/default.png",
             "assets/images/hair/base1.png",
           ],
         ),
@@ -72,6 +76,7 @@ fullbody = [
           .fronthair: [
         Fronthair(
           fronthair: [
+            "assets/images/default.png",
             "assets/images/hair/front-hair1.png",
           ],
         ),

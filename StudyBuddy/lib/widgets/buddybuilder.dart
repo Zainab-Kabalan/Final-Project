@@ -32,7 +32,10 @@ class Buddymakerscreen
     return Stack(
       children: [
         Image.asset(
-          'assets/images/hair/base1.png',
+          body
+              .buddybackhair[Assestsofbuddy
+                  .backhair]![0]
+              .backhair[0],
           height:
               200,
           width:
@@ -64,7 +67,7 @@ class Buddymakerscreen
           body
               .buddyclothes[Assestsofbuddy
                   .clothes]![0]
-              .clothes[1],
+              .clothes[0],
           height:
               200,
           width:
@@ -77,7 +80,10 @@ class Buddymakerscreen
                   .contain,
         ),
         Image.asset(
-          'assets/images/accessories/ribbon-A1.png',
+          body
+              .buddyaccesories[Assestsofbuddy
+                  .accessories]![0]
+              .accesories[0],
           height:
               200,
           width:
@@ -90,7 +96,10 @@ class Buddymakerscreen
                   .contain,
         ),
         Image.asset(
-          'assets/images/eyes/girl-eyes1.png',
+          body
+              .buddyeyes[Assestsofbuddy
+                  .eyes]![0]
+              .eyes[0],
           height:
               200,
           width:
@@ -103,7 +112,10 @@ class Buddymakerscreen
                   .contain,
         ),
         Image.asset(
-          'assets/images/hair/front-hair1.png',
+          body
+              .buddyfronthair[Assestsofbuddy
+                  .fronthair]![0]
+              .fronthair[0],
           height:
               200,
           width:
