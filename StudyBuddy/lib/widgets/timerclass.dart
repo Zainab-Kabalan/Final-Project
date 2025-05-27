@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:timer/widgets/buddybuilder.dart';
+// import 'package:timer/widgets/buddybuilder.dart';
 
 class Timerclass
     extends
@@ -286,7 +286,7 @@ class _timerapp
               height:
                   100,
             ),
-            Buddymakerscreen(),
+            // Buddymakerscreen(),s
           ],
         ),
       ),
