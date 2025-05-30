@@ -5,7 +5,7 @@ import 'package:timer/models/assestsofbuddy.dart';
 class Buddystack
     extends
         StatelessWidget {
-  Buddystack({
+  const Buddystack({
     required this.body,
     required this.buddystack,
     super.key,
@@ -80,23 +80,6 @@ class Buddystack
         ),
         Image.asset(
           body
-              .buddyaccesories[Assestsofbuddy
-                  .accessories]![0]
-              .accesories[buddystack[Assestsofbuddy
-              .accessories]!],
-          height:
-              200,
-          width:
-              200,
-          filterQuality:
-              FilterQuality
-                  .none,
-          fit:
-              BoxFit
-                  .contain,
-        ),
-        Image.asset(
-          body
               .buddyeyes[Assestsofbuddy
                   .eyes]![0]
               .eyes[buddystack[Assestsofbuddy
@@ -118,6 +101,24 @@ class Buddystack
                   .fronthair]![0]
               .fronthair[buddystack[Assestsofbuddy
               .fronthair]!],
+          height:
+              200,
+          width:
+              200,
+          filterQuality:
+              FilterQuality
+                  .none,
+          fit:
+              BoxFit
+                  .contain,
+        ),
+
+        Image.asset(
+          body
+              .buddyaccesories[Assestsofbuddy
+                  .accessories]![0]
+              .accesories[buddystack[Assestsofbuddy
+              .accessories]!],
           height:
               200,
           width:
