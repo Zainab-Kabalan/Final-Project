@@ -1,4 +1,4 @@
-import 'package:timer/models/assestsofbuddy.dart';
+import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 
 class Assestchoice {
   Assestchoice({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:timer/models/FullbodyOfChoice.dart';
-import 'package:timer/models/assestsofbuddy.dart';
+import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
+import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/screens/BuddyTimer.dart';
-import 'package:timer/studybuddydata/data.dart';
+import 'package:timer/models/studybuddydata/data.dart';
 import 'package:timer/screens/buddybuilder.dart';
 import 'package:timer/widgets/buddystack.dart';
 
@@ -173,6 +173,18 @@ class _BodyofchoiceState
 
     body =
         fullbody[0];
-    return screen;
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            "assets/images/backgrounds/background-1.png",
+          ),
+          fit:
+              BoxFit
+                  .cover,
+        ),
+      ),
+      child: screen,
+    );
   }
 }

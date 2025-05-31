@@ -1,11 +1,11 @@
-import 'package:timer/models/models%20of%20assests/accesories.dart';
-import 'package:timer/models/models%20of%20assests/backhair.dart';
-import 'package:timer/models/models%20of%20assests/clothes.dart';
-import 'package:timer/models/FullbodyOfChoice.dart';
-import 'package:timer/models/assestsofbuddy.dart';
-import 'package:timer/models/models%20of%20assests/eyes.dart';
-import 'package:timer/models/models%20of%20assests/fronthair.dart';
-import 'package:timer/models/models%20of%20assests/skins.dart';
+import 'package:timer/models/BuddyAssets/models%20of%20assests/accesories.dart';
+import 'package:timer/models/BuddyAssets/models%20of%20assests/backhair.dart';
+import 'package:timer/models/BuddyAssets/models%20of%20assests/clothes.dart';
+import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
+import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
+import 'package:timer/models/BuddyAssets/models%20of%20assests/eyes.dart';
+import 'package:timer/models/BuddyAssets/models%20of%20assests/fronthair.dart';
+import 'package:timer/models/BuddyAssets/models%20of%20assests/skins.dart';
 
 List<
   Fullbodyofchoice

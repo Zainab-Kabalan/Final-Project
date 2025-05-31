@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:timer/models/FullbodyOfChoice.dart';
-import 'package:timer/models/assestsofbuddy.dart';
+import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
+import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
+import 'package:timer/widgets/BuddychosingDropDownButton.dart';
 import 'package:timer/widgets/buddystack.dart';
 
 class Buddytimer
@@ -39,91 +40,270 @@ class Buddytimer
     BuildContext
     context,
   ) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height:
-                  30,
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            height:
+                30,
+          ),
+          Card(
+            color: Color.fromARGB(
+              162,
+              150,
+              239,
+              255,
             ),
-            Card(
-              color: Color.fromARGB(
-                167,
-                126,
-                203,
-                247,
-              ),
-              elevation:
-                  2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  12,
+            elevation:
+                2,
+            margin:
+                EdgeInsets.all(
+                  10,
                 ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                12,
               ),
-              child: Column(
-                children: [
-                  DropdownButtonHideUnderline(
-                    child: ButtonTheme(
-                      alignedDropdown:
-                          true,
-                      child: DropdownButton<
-                        int
-                      >(
-                        value:
-                            selectedBuddy,
-                        items:
-                            List.generate(
-                              studdybuddies.length,
-                              (
-                                index,
-                              ) {
-                                return DropdownMenuItem<
-                                  int
-                                >(
-                                  value:
-                                      index,
-                                  child: Buddystack(
-                                    body:
-                                        body,
-                                    buddystack:
-                                        studdybuddies[index],
-                                  ),
-                                );
-                              },
-                            ).toList(),
-                        onChanged: (
-                          selectedBuddy,
-                        ) {
-                          switchbuddies(
-                            selectedBuddy!,
-                          );
-                        },
+            ),
+            child: Column(
+              children: [
+                Buddychosingdropdownbutton(
+                  switchbuddies:
+                      switchbuddies,
+                  selectedBuddy:
+                      selectedBuddy,
+                  studdybuddies:
+                      studdybuddies,
+                  buddystack:
+                      buddystack,
+                  body:
+                      body,
+                ),
+                SizedBox(
+                  height:
+                      5,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Session Time:",
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width:
+                          100,
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        child: TextField(
+                          keyboardType:
+                              TextInputType.number,
+                          maxLength:
+                              2,
+                          decoration: InputDecoration(
+                            isDense:
+                                true,
+                            counterText:
+                                "",
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width:
+                    Padding(
+                      padding: EdgeInsets.all(
                         5,
-                    height:
-                        20,
-                  ),
-                  TextField(),
-                ],
-              ),
+                      ),
+                    ),
+                    SizedBox(
+                      height:
+                          40,
+                      child: Center(
+                        child: Text(
+                          ":",
+                          style: TextStyle(
+                            fontSize:
+                                20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(
+                        5,
+                      ),
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        child: TextField(
+                          keyboardType:
+                              TextInputType.number,
+                          maxLength:
+                              2,
+                          decoration: InputDecoration(
+                            isDense:
+                                true,
+                            counterText:
+                                "",
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.all(
+                        5,
+                      ),
+                    ),
+                    SizedBox(
+                      height:
+                          40,
+                      child: Center(
+                        child: Text(
+                          ":",
+                          style: TextStyle(
+                            fontSize:
+                                20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(
+                        5,
+                      ),
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        child: TextField(
+                          keyboardType:
+                              TextInputType.number,
+                          maxLength:
+                              2,
+                          decoration: InputDecoration(
+                            isDense:
+                                true,
+                            counterText:
+                                "",
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      width:
+                          100,
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Break Time:",
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width:
+                          100,
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        child: TextField(
+                          keyboardType:
+                              TextInputType.number,
+                          maxLength:
+                              2,
+                          decoration: InputDecoration(
+                            isDense:
+                                true,
+                            counterText:
+                                "",
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        child: TextField(
+                          keyboardType:
+                              TextInputType.number,
+                          maxLength:
+                              2,
+                          decoration: InputDecoration(
+                            isDense:
+                                true,
+                            counterText:
+                                "",
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.all(
+                        5,
+                      ),
+                    ),
+                    SizedBox(
+                      height:
+                          40,
+                      child: Center(
+                        child: Text(
+                          ":",
+                          style: TextStyle(
+                            fontSize:
+                                20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(
+                        5,
+                      ),
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        child: TextField(
+                          keyboardType:
+                              TextInputType.number,
+                          maxLength:
+                              2,
+                          decoration: InputDecoration(
+                            isDense:
+                                true,
+                            counterText:
+                                "",
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      width:
+                          100,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            SizedBox(
-              height:
-                  150,
-            ),
-            Buddystack(
-              body:
-                  body,
-              buddystack:
-                  studdybuddies[selectedBuddy],
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height:
+                50,
+          ),
+          Buddystack(
+            body:
+                body,
+            buddystack:
+                studdybuddies[selectedBuddy],
+          ),
+        ],
       ),
     );
   }

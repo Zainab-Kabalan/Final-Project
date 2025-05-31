@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timer/models/FullbodyOfChoice.dart';
-import 'package:timer/models/assestsofbuddy.dart';
+import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
+import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 
 class Buddystack
     extends
