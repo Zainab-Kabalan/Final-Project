@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
-import 'package:timer/widgets/buddyinfoW.dart';
+
 import 'package:timer/widgets/buddystack.dart';
 import 'package:timer/widgets/buttonscreationbuddy.dart';
 import 'package:timer/widgets/buttonsforassets.dart';
@@ -10,8 +10,11 @@ import 'package:timer/widgets/infobkg.dart';
 
 class Buddymakerscreen
     extends
-        StatelessWidget {
+        StatefulWidget {
   const Buddymakerscreen({
+    required this.Valuetaking,
+
+    required this.subjecttaking,
     required this.whatTochange,
     required this.chosenAsset,
     required this.savebuddy,
@@ -19,8 +22,15 @@ class Buddymakerscreen
     required this.body,
     required this.change,
     required this.index,
+    required this.text,
     super.key,
   });
+
+  final subjecttaking;
+  final void
+  Function(String)
+  text;
+  final Valuetaking;
   final Fullbodyofchoice
   body;
   final void
@@ -44,10 +54,24 @@ class Buddymakerscreen
 
   final Map<
     Assestsofbuddy,
-    int
+    dynamic
   >
   buddystack;
   final int index;
+
+  @override
+  State<
+    Buddymakerscreen
+  >
+  createState() =>
+      _BuddymakerscreenState();
+}
+
+class _BuddymakerscreenState
+    extends
+        State<
+          Buddymakerscreen
+        > {
   @override
   Widget build(
     BuildContext
@@ -66,9 +90,15 @@ class Buddymakerscreen
           SizedBox(
             child: Infobkg(
               info:
-                  chosenAsset,
+                  widget.chosenAsset,
               savebuddy:
-                  savebuddy,
+                  widget.savebuddy,
+              Valuetaking:
+                  widget.Valuetaking,
+              text:
+                  widget.text,
+              subjecttaking:
+                  widget.subjecttaking,
             ),
           ),
           SizedBox(
@@ -76,9 +106,9 @@ class Buddymakerscreen
                 200,
             child: Buddystack(
               body:
-                  body,
+                  widget.body,
               buddystack:
-                  buddystack,
+                  widget.buddystack,
             ),
           ),
           SizedBox(
@@ -86,7 +116,7 @@ class Buddymakerscreen
                 40,
             child: Buttonscreationbuddy(
               whatTochange:
-                  whatTochange,
+                  widget.whatTochange,
             ),
           ),
           SizedBox(
@@ -94,13 +124,13 @@ class Buddymakerscreen
                 200,
             child: Buttonsforassets(
               body:
-                  body,
+                  widget.body,
               chosenAsset:
-                  chosenAsset,
+                  widget.chosenAsset,
               index:
-                  index,
+                  widget.index,
               change:
-                  change,
+                  widget.change,
             ),
           ),
         ],

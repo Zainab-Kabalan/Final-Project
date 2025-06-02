@@ -1,10 +1,14 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
-import 'package:timer/screens/BuddyTimer.dart';
+import 'package:timer/models/BuddyInfo/buddyinfo.dart';
 import 'package:timer/models/studybuddydata/data.dart';
 import 'package:timer/screens/buddybuilder.dart';
+import 'package:timer/screens/buddylistandfunctions.dart';
+import 'package:timer/screens/timerclass.dart';
 import 'package:timer/widgets/buddystack.dart';
+import 'package:timer/widgets/container.dart';
 
 class Bodyofchoice
     extends
@@ -39,15 +43,20 @@ class _BodyofchoiceState
   List<
     Map<
       Assestsofbuddy,
-      int
+      dynamic
     >
   >
   studdybuddies = [
   ];
+  // String text;
 
+  final subjecttaking =
+      TextEditingController();
+  final Valuetaking =
+      TextEditingController();
   Map<
     Assestsofbuddy,
-    int
+    dynamic
   >
   buddystack = {
     Assestsofbuddy
@@ -62,6 +71,10 @@ class _BodyofchoiceState
         .eyes: 0,
     Assestsofbuddy
         .skin: 0,
+    Assestsofbuddy
+        .name: '',
+    Assestsofbuddy
+        .subject: '',
   };
   late Buddystack
   buddy;
@@ -70,6 +83,15 @@ class _BodyofchoiceState
       'maker';
   @override
   void initState() {
+    info = Buddyinfo(
+      name:
+          Valuetaking
+              .text,
+      subject:
+          subjecttaking
+              .text,
+    );
+
     body =
         fullbody[0];
     buddy = Buddystack(
@@ -79,17 +101,45 @@ class _BodyofchoiceState
     );
     selectedBuddy =
         0;
+
     super
         .initState();
   }
 
+  late Buddyinfo
+  info;
+  //methods
   void chosenBuddy(
     int newbuddy,
   ) {
+    print(
+      "${studdybuddies[newbuddy]}",
+    );
     setState(() {
       selectedBuddy =
           newbuddy;
       studdybuddies[newbuddy];
+    });
+  }
+
+  void textbuddy(
+    text,
+  ) {
+    setState(() {
+      info = Buddyinfo(
+        name:
+            Valuetaking
+                .text,
+        subject:
+            subjecttaking
+                .text,
+      );
+      buddy.buddystack[Assestsofbuddy
+              .name] =
+          info.name;
+      buddy.buddystack[Assestsofbuddy
+              .subject] =
+          info.subject;
     });
   }
 
@@ -105,7 +155,7 @@ class _BodyofchoiceState
       );
     });
     currentscreen =
-        'timer';
+        'card';
     print(
       studdybuddies,
     );
@@ -132,59 +182,160 @@ class _BodyofchoiceState
     });
   }
 
+  void edit(
+    Assestsofbuddy
+    chosenasset,
+    int
+    indexofbuddy,
+  ) {
+    setState(() {
+      currentscreen =
+          'maker';
+    });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (
+              context,
+            ) => BuddyContainer(
+              child: Buddymakerscreen(
+                body:
+                    body,
+                change:
+                    chosen,
+                buddystack:
+                    buddystack,
+                savebuddy:
+                    save,
+                index:
+                    indexofbuddy,
+                whatTochange:
+                    whatTochange,
+                chosenAsset:
+                    chosenasset,
+                Valuetaking:
+                    Valuetaking,
+                text:
+                    textbuddy,
+                subjecttaking:
+                    subjecttaking,
+              ),
+            ),
+      ),
+    );
+  }
+
+  String? buddyName;
+
+  int screenindex =
+      0;
   @override
   Widget build(
     BuildContext
     context,
   ) {
-    Widget
-    screen = Buddymakerscreen(
-      body: body,
-      change:
-          chosen,
-      buddystack:
-          buddystack,
-      savebuddy:
-          save,
-      index:
-          indexofbuddy,
-      whatTochange:
-          whatTochange,
-      chosenAsset:
-          chosenasset,
-    );
-    if (currentscreen ==
-            'timer' &&
-        studdybuddies
-                .length ==
-            2) {
-      screen = Buddytimer(
+    List<Widget>
+    widgets = [
+      Timerclass(
+        switchbuddies:
+            chosenBuddy,
+        selectedBuddy:
+            selectedBuddy,
         studdybuddies:
             studdybuddies,
         buddystack:
             buddystack,
         body: body,
-        selectedBuddy:
-            selectedBuddy,
-        switchbuddies:
-            chosenBuddy,
-      );
-    }
+      ),
+
+      ///body
+      /// selectedbuddy
+      ///  studdybuddies,
+      ///  switchbuddies,
+      /// indexofbuddy
+      /// chosenasset
+      /// edit
+      /// info
+      ///  buddystack chosenbody
+      Buddymakerscreen(
+        body: body,
+        change:
+            chosen,
+        buddystack:
+            buddystack,
+        savebuddy:
+            save,
+        index:
+            indexofbuddy,
+        whatTochange:
+            whatTochange,
+        chosenAsset:
+            chosenasset,
+        Valuetaking:
+            Valuetaking,
+        text:
+            textbuddy,
+        subjecttaking:
+            subjecttaking,
+      ),
+      Buddylistandfunctions(
+        body: body,
+        buddystack:
+            buddystack,
+        info: info,
+        edit: edit,
+        studdybuddies:
+            studdybuddies,
+        as:
+            chosenasset,
+        i: indexofbuddy,
+      ),
+    ];
 
     body =
         fullbody[0];
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            "assets/images/backgrounds/background-1.png",
-          ),
-          fit:
-              BoxFit
-                  .cover,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body:
+            widgets[screenindex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap:
+              (
+                index,
+              ) => setState(() {
+                screenindex =
+                    index;
+              }),
+          currentIndex:
+              screenindex,
+          items: [
+            BottomNavigationBarItem(
+              label:
+                  "Timer",
+              icon: Icon(
+                Icons.home,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label:
+                  "Buddies",
+              icon: Icon(
+                Icons.person_3,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label:
+                  "History",
+              icon: Icon(
+                Icons.history,
+              ),
+            ),
+          ],
         ),
       ),
-      child: screen,
     );
   }
 }

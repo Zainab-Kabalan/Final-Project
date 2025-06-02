@@ -14,7 +14,7 @@ class Buddystack
   body;
   final Map<
     Assestsofbuddy,
-    int
+    dynamic
   >
   buddystack;
   @override

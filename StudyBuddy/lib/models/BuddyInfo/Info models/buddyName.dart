@@ -2,6 +2,5 @@ class Buddyname {
   Buddyname({
     required this.name,
   });
-  final List<String>
-  name;
+  final String name;
 }

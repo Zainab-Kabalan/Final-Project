@@ -25,13 +25,13 @@ class Buddychosingdropdownbutton
   final List<
     Map<
       Assestsofbuddy,
-      int
+      dynamic
     >
   >
   studdybuddies;
   final Map<
     Assestsofbuddy,
-    int
+    dynamic
   >
   buddystack;
 

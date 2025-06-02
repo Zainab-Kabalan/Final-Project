@@ -6,16 +6,27 @@ class Infobkg
     extends
         StatelessWidget {
   const Infobkg({
+    required this.subjecttaking,
+    required this.text,
+    required this.Valuetaking,
     required this.info,
     required this.savebuddy,
+
     super.key,
   });
+  final Valuetaking;
+
+  final subjecttaking;
   final void
   Function(
     Assestsofbuddy
     info,
   )
   savebuddy;
+  final Function(
+    String,
+  )
+  text;
   final Assestsofbuddy
   info;
   @override
@@ -47,10 +58,18 @@ class Infobkg
           Buddyinfow(
             value:
                 "Name:",
+            Valuetaking:
+                Valuetaking,
+            text:
+                text,
           ),
           Buddyinfow(
             value:
                 "Subject:",
+            Valuetaking:
+                subjecttaking,
+            text:
+                text,
           ),
           ElevatedButton(
             onPressed: () {

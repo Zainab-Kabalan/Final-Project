@@ -4,11 +4,18 @@ class Buddyinfow
     extends
         StatelessWidget {
   const Buddyinfow({
+    required this.text,
+    required this.Valuetaking,
     required this.value,
     super.key,
   });
+  final Function(
+    String,
+  )
+  text;
   final String
   value;
+  final Valuetaking;
 
   @override
   Widget build(
@@ -21,17 +28,6 @@ class Buddyinfow
           mainAxisAlignment:
               MainAxisAlignment
                   .center,
-          children: [
-            Text(
-              value,
-              style: TextStyle(
-                fontSize:
-                    30,
-                fontWeight:
-                    FontWeight.bold,
-              ),
-            ),
-          ],
         ),
         SizedBox(
           height:
@@ -39,11 +35,35 @@ class Buddyinfow
           width:
               100,
           child: TextField(
+            onChanged: (
+              value,
+            ) {
+              text(
+                value,
+              );
+            },
+            controller:
+                Valuetaking,
             keyboardType:
                 TextInputType.text,
             maxLength:
                 30,
             decoration: InputDecoration(
+              labelText:
+                  value,
+              labelStyle: TextStyle(
+                color: const Color.fromARGB(
+                  255,
+                  90,
+                  111,
+                  122,
+                ),
+                fontSize:
+                    20,
+                fontWeight:
+                    FontWeight.bold,
+              ),
+
               isDense:
                   true,
               counterText:

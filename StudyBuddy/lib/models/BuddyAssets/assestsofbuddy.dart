@@ -5,4 +5,6 @@ enum Assestsofbuddy {
   accessories,
   fronthair,
   backhair,
+  name,
+  subject,
 }
