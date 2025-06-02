@@ -76,8 +76,6 @@ class _BodyofchoiceState
     Assestsofbuddy
         .subject: '',
   };
-  late Buddystack
-  buddy;
   String
   currentscreen =
       'maker';
@@ -94,11 +92,7 @@ class _BodyofchoiceState
 
     body =
         fullbody[0];
-    buddy = Buddystack(
-      body: body,
-      buddystack:
-          buddystack,
-    );
+
     selectedBuddy =
         0;
 
@@ -119,66 +113,6 @@ class _BodyofchoiceState
       selectedBuddy =
           newbuddy;
       studdybuddies[newbuddy];
-    });
-  }
-
-  void textbuddy(
-    text,
-  ) {
-    setState(() {
-      info = Buddyinfo(
-        name:
-            Valuetaking
-                .text,
-        subject:
-            subjecttaking
-                .text,
-      );
-      buddy.buddystack[Assestsofbuddy
-              .name] =
-          info.name;
-      buddy.buddystack[Assestsofbuddy
-              .subject] =
-          info.subject;
-    });
-  }
-
-  void save(
-    Assestsofbuddy
-    type,
-  ) {
-    setState(() {
-      studdybuddies.add(
-        Map.from(
-          buddystack,
-        ),
-      );
-    });
-    currentscreen =
-        'card';
-    print(
-      studdybuddies,
-    );
-  }
-
-  void chosen(
-    Assestsofbuddy
-    type,
-    int index,
-  ) {
-    setState(() {
-      buddy.buddystack[type] =
-          index;
-    });
-  }
-
-  void whatTochange(
-    Assestsofbuddy
-    current,
-  ) {
-    setState(() {
-      chosenasset =
-          current;
     });
   }
 
@@ -203,24 +137,21 @@ class _BodyofchoiceState
               child: Buddymakerscreen(
                 body:
                     body,
-                change:
-                    chosen,
                 buddystack:
                     buddystack,
-                savebuddy:
-                    save,
+
                 index:
                     indexofbuddy,
-                whatTochange:
-                    whatTochange,
                 chosenAsset:
                     chosenasset,
                 Valuetaking:
                     Valuetaking,
-                text:
-                    textbuddy,
                 subjecttaking:
                     subjecttaking,
+                studdybuddies:
+                    studdybuddies,
+                info:
+                    info,
               ),
             ),
       ),
@@ -261,24 +192,19 @@ class _BodyofchoiceState
       ///  buddystack chosenbody
       Buddymakerscreen(
         body: body,
-        change:
-            chosen,
         buddystack:
             buddystack,
-        savebuddy:
-            save,
         index:
             indexofbuddy,
-        whatTochange:
-            whatTochange,
         chosenAsset:
             chosenasset,
         Valuetaking:
             Valuetaking,
-        text:
-            textbuddy,
         subjecttaking:
             subjecttaking,
+        studdybuddies:
+            studdybuddies,
+        info: info,
       ),
       Buddylistandfunctions(
         body: body,

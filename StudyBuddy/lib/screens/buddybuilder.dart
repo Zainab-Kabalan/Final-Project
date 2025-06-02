@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
+import 'package:timer/models/BuddyInfo/buddyinfo.dart';
 
 import 'package:timer/widgets/buddystack.dart';
 import 'package:timer/widgets/buttonscreationbuddy.dart';
@@ -11,46 +12,26 @@ import 'package:timer/widgets/infobkg.dart';
 class Buddymakerscreen
     extends
         StatefulWidget {
-  const Buddymakerscreen({
+  Buddymakerscreen({
+    required this.info,
+    required this.studdybuddies,
     required this.Valuetaking,
-
     required this.subjecttaking,
-    required this.whatTochange,
     required this.chosenAsset,
-    required this.savebuddy,
     required this.buddystack,
     required this.body,
-    required this.change,
     required this.index,
-    required this.text,
+
     super.key,
   });
 
   final subjecttaking;
-  final void
-  Function(String)
-  text;
   final Valuetaking;
   final Fullbodyofchoice
   body;
-  final void
-  Function(
-    Assestsofbuddy,
-  )
-  savebuddy;
-  final Assestsofbuddy
+
+  Assestsofbuddy
   chosenAsset;
-  final void
-  Function(
-    Assestsofbuddy,
-    int index,
-  )
-  change;
-  final void
-  Function(
-    Assestsofbuddy,
-  )
-  whatTochange;
 
   final Map<
     Assestsofbuddy,
@@ -58,7 +39,14 @@ class Buddymakerscreen
   >
   buddystack;
   final int index;
-
+  final List<
+    Map<
+      Assestsofbuddy,
+      dynamic
+    >
+  >
+  studdybuddies;
+  Buddyinfo info;
   @override
   State<
     Buddymakerscreen
@@ -72,6 +60,87 @@ class _BuddymakerscreenState
         State<
           Buddymakerscreen
         > {
+  late Buddystack
+  buddy;
+  @override
+  void initState() {
+    buddy = Buddystack(
+      body:
+          widget
+              .body,
+      buddystack:
+          widget
+              .buddystack,
+    );
+    super
+        .initState();
+  }
+
+  void chosen(
+    Assestsofbuddy
+    type,
+    int index,
+  ) {
+    setState(() {
+      buddy.buddystack[type] =
+          index;
+    });
+  }
+
+  void save(
+    Assestsofbuddy
+    type,
+  ) {
+    setState(() {
+      widget
+          .studdybuddies
+          .add(
+            Map.from(
+              widget
+                  .buddystack,
+            ),
+          );
+    });
+  }
+
+  void textbuddy(
+    text,
+  ) {
+    setState(() {
+      widget
+          .info = Buddyinfo(
+        name:
+            widget
+                .Valuetaking
+                .text,
+        subject:
+            widget
+                .subjecttaking
+                .text,
+      );
+      buddy.buddystack[Assestsofbuddy
+              .name] =
+          widget
+              .info
+              .name;
+      buddy.buddystack[Assestsofbuddy
+              .subject] =
+          widget
+              .info
+              .subject;
+    });
+  }
+
+  void whatTochange(
+    Assestsofbuddy
+    current,
+  ) {
+    setState(() {
+      widget.chosenAsset =
+          current;
+    });
+  }
+
   @override
   Widget build(
     BuildContext
@@ -92,11 +161,11 @@ class _BuddymakerscreenState
               info:
                   widget.chosenAsset,
               savebuddy:
-                  widget.savebuddy,
+                  save,
               Valuetaking:
                   widget.Valuetaking,
               text:
-                  widget.text,
+                  textbuddy,
               subjecttaking:
                   widget.subjecttaking,
             ),
@@ -116,7 +185,7 @@ class _BuddymakerscreenState
                 40,
             child: Buttonscreationbuddy(
               whatTochange:
-                  widget.whatTochange,
+                  whatTochange,
             ),
           ),
           SizedBox(
@@ -130,7 +199,7 @@ class _BuddymakerscreenState
               index:
                   widget.index,
               change:
-                  widget.change,
+                  chosen,
             ),
           ),
         ],
