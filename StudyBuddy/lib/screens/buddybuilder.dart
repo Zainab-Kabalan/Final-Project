@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/models/BuddyInfo/buddyinfo.dart';
+import 'package:timer/screens/timerclass.dart';
 
 import 'package:timer/widgets/buddystack.dart';
 import 'package:timer/widgets/buttonscreationbuddy.dart';
@@ -13,6 +14,7 @@ class Buddymakerscreen
     extends
         StatefulWidget {
   Buddymakerscreen({
+    required this.totaltimestudied,
     required this.info,
     required this.studdybuddies,
     required this.Valuetaking,
@@ -29,7 +31,8 @@ class Buddymakerscreen
   final Valuetaking;
   final Fullbodyofchoice
   body;
-
+  int
+  totaltimestudied;
   Assestsofbuddy
   chosenAsset;
 
@@ -60,6 +63,8 @@ class _BuddymakerscreenState
         State<
           Buddymakerscreen
         > {
+  late Timerclass
+  time;
   late Buddystack
   buddy;
   @override
@@ -101,6 +106,9 @@ class _BuddymakerscreenState
             ),
           );
     });
+    Navigator.pop(
+      context,
+    );
   }
 
   void textbuddy(
@@ -117,6 +125,9 @@ class _BuddymakerscreenState
             widget
                 .subjecttaking
                 .text,
+        totaltimestudied:
+            widget
+                .totaltimestudied,
       );
       buddy.buddystack[Assestsofbuddy
               .name] =
@@ -128,6 +139,11 @@ class _BuddymakerscreenState
           widget
               .info
               .subject;
+      buddy.buddystack[Assestsofbuddy
+              .totaltime] =
+          widget
+              .info
+              .totaltimestudied;
     });
   }
 

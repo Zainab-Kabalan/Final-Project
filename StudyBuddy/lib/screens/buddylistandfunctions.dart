@@ -8,7 +8,9 @@ import 'package:timer/widgets/singlecarddata.dart';
 class Buddylistandfunctions
     extends
         StatelessWidget {
-  const Buddylistandfunctions({
+  Buddylistandfunctions({
+    required this.view,
+    required this.totaltimestudied,
     required this.as,
     required this.i,
     required this.studdybuddies,
@@ -18,6 +20,8 @@ class Buddylistandfunctions
     required this.edit,
     super.key,
   });
+  int
+  totaltimestudied;
   final Assestsofbuddy
   as;
   final int i;
@@ -30,7 +34,9 @@ class Buddylistandfunctions
     dynamic
   >
   buddystack;
-
+  final void
+  Function(int)
+  view;
   final void
   Function(
     Assestsofbuddy,
@@ -49,30 +55,34 @@ class Buddylistandfunctions
     BuildContext
     context,
   ) {
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ...studdybuddies.map((
-                buddystack,
-              ) {
-                return Singlecarddata(
-                  info:
-                      info,
-                  buddystack:
-                      buddystack,
-                  body:
-                      body,
-                  edit:
-                      edit,
-                  as:
-                      as,
-                  i: i,
-                );
-              }),
-            ],
-          ),
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ...studdybuddies.map((
+              buddystack,
+            ) {
+              return Singlecarddata(
+                info:
+                    info,
+                buddystack:
+                    buddystack,
+                body:
+                    body,
+                edit:
+                    edit,
+                as:
+                    as,
+                i: i,
+                totaltimestudied:
+                    totaltimestudied,
+                view:
+                    view,
+                studdybuddies:
+                    studdybuddies,
+              );
+            }),
+          ],
         ),
       ),
     );

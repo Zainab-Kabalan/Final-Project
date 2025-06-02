@@ -7,4 +7,5 @@ enum Assestsofbuddy {
   backhair,
   name,
   subject,
+  totaltime,
 }

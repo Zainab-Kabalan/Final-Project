@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
-import 'package:timer/widgets/Buddyinacontainer.dart';
+import 'package:timer/widgets/buddystack.dart';
 
-class Buddyfullinfo
+class Buddyinacontainer
     extends
         StatelessWidget {
-  const Buddyfullinfo({
-    required this.studdybuddies,
+  const Buddyinacontainer({
     required this.body,
     required this.buddystack,
     super.key,
@@ -19,24 +18,26 @@ class Buddyfullinfo
     dynamic
   >
   buddystack;
-  final List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
-  studdybuddies;
-
   @override
   Widget build(
     BuildContext
     context,
   ) {
     return Card(
-      child: Buddyinacontainer(
-        body: body,
-        buddystack:
-            buddystack,
+      child: Container(
+        color:
+            const Color.fromARGB(
+              255,
+              141,
+              139,
+              139,
+            ),
+        child: Buddystack(
+          body:
+              body,
+          buddystack:
+              buddystack,
+        ),
       ),
     );
   }

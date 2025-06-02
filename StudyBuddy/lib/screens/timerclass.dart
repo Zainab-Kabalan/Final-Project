@@ -18,7 +18,6 @@ class Timerclass
     required this.body,
     super.key,
   });
-
   final void
   Function(int)
   switchbuddies;
@@ -99,6 +98,14 @@ class _timerapp
   int
   minutesremaining =
       0;
+  int
+  totaltimebreak =
+      0;
+  int
+  totaltimestudied =
+      0;
+  int totaltime = 0;
+
   //bools
   bool
   visiblebutton =
@@ -141,6 +148,12 @@ class _timerapp
           minBreak
               .text,
         );
+    totaltimebreak =
+        (breakhours *
+            3600) +
+        (breakminutes *
+            60) +
+        breakseconds;
     timer?.cancel();
     if (studystate ==
         1) {
@@ -165,8 +178,19 @@ class _timerapp
       setState(() {
         visiblebreak =
             true;
-        secondsremaining =
-            session;
+        if (session %
+                2 ==
+            0) {
+          secondsremaining =
+              session ~/
+              2;
+        } else {
+          secondsremaining =
+              session ~/
+                  2 -
+              1;
+        }
+
         studystate =
             3;
         state =
@@ -180,6 +204,22 @@ class _timerapp
           'over';
       visiblebutton =
           false;
+      setState(() {
+        totaltime =
+            totaltimebreak +
+            totaltimestudied;
+        widget.buddystack[Assestsofbuddy
+                .totaltime] =
+            (widget.buddystack[Assestsofbuddy.totaltime] ??
+                0) +
+            totaltime;
+        widget.studdybuddies[widget
+                .selectedBuddy][Assestsofbuddy
+                .totaltime] =
+            widget
+                .buddystack[Assestsofbuddy
+                .totaltime];
+      });
     }
   }
 
@@ -202,12 +242,20 @@ class _timerapp
               .text,
         );
 
+    totaltimestudied =
+        (hoursremaining *
+            3600) +
+        (minutesremaining *
+            60) +
+        secondsremaining;
+
     secondsremaining =
         (hoursremaining *
             3600) +
         (minutesremaining *
             60) +
         secondsremaining;
+
     if (secondsremaining %
             2 ==
         0) {
@@ -220,6 +268,9 @@ class _timerapp
               2 +
           1;
     }
+
+    session =
+        secondsremaining;
     const sec =
         Duration(
           seconds:
@@ -248,7 +299,17 @@ class _timerapp
   //dispose
   @override
   void dispose() {
+    secBreak
+        .dispose();
     secEntered
+        .dispose();
+    minBreak
+        .dispose();
+    minEntered
+        .dispose();
+    hourBreak
+        .dispose();
+    hourEntered
         .dispose();
     timer?.cancel();
     super.dispose();
@@ -384,392 +445,391 @@ class _timerapp
         states[6]) {
       s = "session cancled.";
     }
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height:
-                  5,
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            height:
+                5,
+          ),
+          Card(
+            color: Color.fromARGB(
+              162,
+              150,
+              239,
+              255,
             ),
-            Card(
-              color: Color.fromARGB(
-                162,
-                150,
-                239,
-                255,
-              ),
-              elevation:
-                  2,
-              margin: EdgeInsets.all(
-                10,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  12,
+            elevation:
+                2,
+            margin:
+                EdgeInsets.all(
+                  10,
                 ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                12,
               ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height:
-                        10,
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height:
+                      10,
+                ),
+                Visibility(
+                  visible:
+                      timerin,
+                  child: Buddychosingdropdownbutton(
+                    switchbuddies:
+                        widget.switchbuddies,
+                    selectedBuddy:
+                        widget.selectedBuddy,
+                    studdybuddies:
+                        widget.studdybuddies,
+                    buddystack:
+                        widget.buddystack,
+                    body:
+                        widget.body,
                   ),
-                  Visibility(
-                    visible:
-                        true,
-                    child: Buddychosingdropdownbutton(
-                      switchbuddies:
-                          widget.switchbuddies,
-                      selectedBuddy:
-                          widget.selectedBuddy,
-                      studdybuddies:
-                          widget.studdybuddies,
-                      buddystack:
-                          widget.buddystack,
-                      body:
-                          widget.body,
-                    ),
-                  ),
-                  Visibility(
-                    visible:
-                        timerin,
-                    child: Column(
-                      children: [
-                        Text(
-                          "Session Time: ",
-                        ),
-                        Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width:
-                                  60,
-                              child: TextField(
-                                controller:
-                                    hourEntered,
-                                keyboardType:
-                                    TextInputType.number,
-                                textAlign:
-                                    TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      18,
-                                ),
-                                decoration: InputDecoration(
-                                  border:
-                                      OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical:
-                                        8,
-                                  ),
-                                  isDense:
-                                      true,
-                                  counterText:
-                                      "",
-                                  hintText:
-                                      "00",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    4,
-                              ),
-                              child: Text(
-                                ":",
-                                style: TextStyle(
-                                  fontSize:
-                                      20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width:
-                                  60,
-                              child: TextField(
-                                controller:
-                                    minEntered,
-                                keyboardType:
-                                    TextInputType.number,
-                                textAlign:
-                                    TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      18,
-                                ),
-                                decoration: InputDecoration(
-                                  border:
-                                      OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical:
-                                        8,
-                                  ),
-                                  isDense:
-                                      true,
-                                  counterText:
-                                      "",
-                                  hintText:
-                                      "00",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    4,
-                              ),
-                              child: Text(
-                                ":",
-                                style: TextStyle(
-                                  fontSize:
-                                      20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width:
-                                  60,
-                              child: TextField(
-                                controller:
-                                    secEntered,
-                                keyboardType:
-                                    TextInputType.number,
-                                textAlign:
-                                    TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      18,
-                                ),
-                                decoration: InputDecoration(
-                                  border:
-                                      OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical:
-                                        8,
-                                  ),
-                                  isDense:
-                                      true,
-                                  counterText:
-                                      "",
-                                  hintText:
-                                      "00",
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Visibility(
-                    visible:
-                        timerin,
-                    child: Column(
-                      children: [
-                        Text(
-                          "Break Time: ",
-                        ),
-                        Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width:
-                                  60,
-                              child: TextField(
-                                controller:
-                                    hourBreak,
-                                keyboardType:
-                                    TextInputType.number,
-                                textAlign:
-                                    TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      18,
-                                ),
-                                decoration: InputDecoration(
-                                  border:
-                                      OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical:
-                                        8,
-                                  ),
-                                  isDense:
-                                      true,
-                                  counterText:
-                                      "",
-                                  hintText:
-                                      "00",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    4,
-                              ),
-                              child: Text(
-                                ":",
-                                style: TextStyle(
-                                  fontSize:
-                                      20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width:
-                                  60,
-                              child: TextField(
-                                controller:
-                                    minBreak,
-                                keyboardType:
-                                    TextInputType.number,
-                                textAlign:
-                                    TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      18,
-                                ),
-                                decoration: InputDecoration(
-                                  border:
-                                      OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical:
-                                        8,
-                                  ),
-                                  isDense:
-                                      true,
-                                  counterText:
-                                      "",
-                                  hintText:
-                                      "00",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    4,
-                              ),
-                              child: Text(
-                                ":",
-                                style: TextStyle(
-                                  fontSize:
-                                      20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width:
-                                  60,
-                              child: TextField(
-                                controller:
-                                    secBreak,
-                                keyboardType:
-                                    TextInputType.number,
-                                textAlign:
-                                    TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      18,
-                                ),
-                                decoration: InputDecoration(
-                                  border:
-                                      OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical:
-                                        8,
-                                  ),
-                                  isDense:
-                                      true,
-                                  counterText:
-                                      "",
-                                  hintText:
-                                      "00",
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height:
-                        5,
-                  ),
-                  Text(
-                    s,
-                    style: TextStyle(
-                      fontWeight:
-                          FontWeight.w500,
-                      fontSize:
-                          15,
-                    ),
-                  ),
-                  Text(
-                    "${(secondsremaining ~/ 3600).toString().padLeft(2, '0')}:${(secondsremaining ~/ 60).toString().padLeft(2, '0')}:${(secondsremaining % 60).toString().padLeft(2, '0')}",
-                    style: TextStyle(
-                      fontSize:
-                          24,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
-                    mainAxisSize:
-                        MainAxisSize.min,
+                ),
+                Visibility(
+                  visible:
+                      timerin,
+                  child: Column(
                     children: [
-                      Visibility(
-                        visible:
-                            visiblebutton,
-                        child: ElevatedButton(
-                          onPressed:
-                              canclebutton,
-                          child: Text(
-                            'cancle',
-                          ),
-                        ),
+                      Text(
+                        "Session Time: ",
                       ),
-                      SizedBox(
-                        width:
-                            10,
-                      ),
-                      Visibility(
-                        visible:
-                            visiblebreak,
-                        child: ElevatedButton(
-                          onPressed:
-                              changebutton,
-                          child: Text(
-                            state,
+                      Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width:
+                                60,
+                            child: TextField(
+                              controller:
+                                  hourEntered,
+                              keyboardType:
+                                  TextInputType.number,
+                              textAlign:
+                                  TextAlign.center,
+                              style: TextStyle(
+                                fontSize:
+                                    18,
+                              ),
+                              decoration: InputDecoration(
+                                border:
+                                    OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical:
+                                      8,
+                                ),
+                                isDense:
+                                    true,
+                                counterText:
+                                    "",
+                                hintText:
+                                    "00",
+                              ),
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  4,
+                            ),
+                            child: Text(
+                              ":",
+                              style: TextStyle(
+                                fontSize:
+                                    20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width:
+                                60,
+                            child: TextField(
+                              controller:
+                                  minEntered,
+                              keyboardType:
+                                  TextInputType.number,
+                              textAlign:
+                                  TextAlign.center,
+                              style: TextStyle(
+                                fontSize:
+                                    18,
+                              ),
+                              decoration: InputDecoration(
+                                border:
+                                    OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical:
+                                      8,
+                                ),
+                                isDense:
+                                    true,
+                                counterText:
+                                    "",
+                                hintText:
+                                    "00",
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  4,
+                            ),
+                            child: Text(
+                              ":",
+                              style: TextStyle(
+                                fontSize:
+                                    20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width:
+                                60,
+                            child: TextField(
+                              controller:
+                                  secEntered,
+                              keyboardType:
+                                  TextInputType.number,
+                              textAlign:
+                                  TextAlign.center,
+                              style: TextStyle(
+                                fontSize:
+                                    18,
+                              ),
+                              decoration: InputDecoration(
+                                border:
+                                    OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical:
+                                      8,
+                                ),
+                                isDense:
+                                    true,
+                                counterText:
+                                    "",
+                                hintText:
+                                    "00",
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height:
-                        10,
+                ),
+                Visibility(
+                  visible:
+                      timerin,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Break Time: ",
+                      ),
+                      Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width:
+                                60,
+                            child: TextField(
+                              controller:
+                                  hourBreak,
+                              keyboardType:
+                                  TextInputType.number,
+                              textAlign:
+                                  TextAlign.center,
+                              style: TextStyle(
+                                fontSize:
+                                    18,
+                              ),
+                              decoration: InputDecoration(
+                                border:
+                                    OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical:
+                                      8,
+                                ),
+                                isDense:
+                                    true,
+                                counterText:
+                                    "",
+                                hintText:
+                                    "00",
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  4,
+                            ),
+                            child: Text(
+                              ":",
+                              style: TextStyle(
+                                fontSize:
+                                    20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width:
+                                60,
+                            child: TextField(
+                              controller:
+                                  minBreak,
+                              keyboardType:
+                                  TextInputType.number,
+                              textAlign:
+                                  TextAlign.center,
+                              style: TextStyle(
+                                fontSize:
+                                    18,
+                              ),
+                              decoration: InputDecoration(
+                                border:
+                                    OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical:
+                                      8,
+                                ),
+                                isDense:
+                                    true,
+                                counterText:
+                                    "",
+                                hintText:
+                                    "00",
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  4,
+                            ),
+                            child: Text(
+                              ":",
+                              style: TextStyle(
+                                fontSize:
+                                    20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width:
+                                60,
+                            child: TextField(
+                              controller:
+                                  secBreak,
+                              keyboardType:
+                                  TextInputType.number,
+                              textAlign:
+                                  TextAlign.center,
+                              style: TextStyle(
+                                fontSize:
+                                    18,
+                              ),
+                              decoration: InputDecoration(
+                                border:
+                                    OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical:
+                                      8,
+                                ),
+                                isDense:
+                                    true,
+                                counterText:
+                                    "",
+                                hintText:
+                                    "00",
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height:
+                      5,
+                ),
+                Text(
+                  s,
+                  style: TextStyle(
+                    fontWeight:
+                        FontWeight.w500,
+                    fontSize:
+                        15,
+                  ),
+                ),
+                Text(
+                  "${(secondsremaining ~/ 3600).toString().padLeft(2, '0')}:${(secondsremaining ~/ 60).toString().padLeft(2, '0')}:${(secondsremaining % 60).toString().padLeft(2, '0')}",
+                  style: TextStyle(
+                    fontSize:
+                        24,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
+                  mainAxisSize:
+                      MainAxisSize.min,
+                  children: [
+                    Visibility(
+                      visible:
+                          visiblebutton,
+                      child: ElevatedButton(
+                        onPressed:
+                            canclebutton,
+                        child: Text(
+                          'cancle',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width:
+                          10,
+                    ),
+                    Visibility(
+                      visible:
+                          visiblebreak,
+                      child: ElevatedButton(
+                        onPressed:
+                            changebutton,
+                        child: Text(
+                          state,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height:
+                      10,
+                ),
+              ],
             ),
-            SizedBox(
-              height:
-                  20,
-            ),
-            Buddystack(
-              body:
-                  widget.body,
-              buddystack:
-                  widget.studdybuddies[widget.selectedBuddy],
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height:
+                20,
+          ),
+          Buddystack(
+            body:
+                widget.body,
+            buddystack:
+                widget.studdybuddies[widget.selectedBuddy],
+          ),
+        ],
       ),
     );
   }

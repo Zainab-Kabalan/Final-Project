@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
@@ -9,7 +7,10 @@ import 'package:timer/widgets/buddystack.dart';
 class Singlecarddata
     extends
         StatelessWidget {
-  const Singlecarddata({
+  Singlecarddata({
+    required this.studdybuddies,
+    required this.view,
+    required this.totaltimestudied,
     required this.as,
     required this.i,
     required this.edit,
@@ -18,6 +19,8 @@ class Singlecarddata
     required this.body,
     super.key,
   });
+  int
+  totaltimestudied;
   final Assestsofbuddy
   as;
   final int i;
@@ -28,6 +31,13 @@ class Singlecarddata
     dynamic
   >
   buddystack;
+  List<
+    Map<
+      Assestsofbuddy,
+      dynamic
+    >
+  >
+  studdybuddies;
   final Buddyinfo
   info;
   final void
@@ -36,6 +46,9 @@ class Singlecarddata
     int,
   )
   edit;
+  final void
+  Function(int)
+  view;
   @override
   Widget build(
     BuildContext
@@ -108,6 +121,9 @@ class Singlecarddata
                       ),
                     ),
                   ),
+                  Text(
+                    "Total Hours Studied: ${buddystack[Assestsofbuddy.totaltime] ?? 0} ",
+                  ),
                 ],
               ),
             ],
@@ -135,8 +151,13 @@ class Singlecarddata
                     10,
               ),
               ElevatedButton(
-                onPressed:
-                    () {},
+                onPressed: () {
+                  view(
+                    studdybuddies.indexOf(
+                      buddystack,
+                    ),
+                  );
+                },
                 child: Text(
                   "view",
                 ),

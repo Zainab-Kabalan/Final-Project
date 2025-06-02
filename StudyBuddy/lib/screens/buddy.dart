@@ -7,6 +7,7 @@ import 'package:timer/models/studybuddydata/data.dart';
 import 'package:timer/screens/buddybuilder.dart';
 import 'package:timer/screens/buddylistandfunctions.dart';
 import 'package:timer/screens/timerclass.dart';
+import 'package:timer/widgets/buddyFullInfo.dart';
 import 'package:timer/widgets/buddystack.dart';
 import 'package:timer/widgets/container.dart';
 
@@ -30,6 +31,35 @@ class _BodyofchoiceState
         State<
           Bodyofchoice
         > {
+  int breakseconds =
+      0;
+
+  int breakhours =
+      0;
+  int breakminutes =
+      0;
+
+  int studystate =
+      0;
+  int session = 0;
+
+  int
+  secondsremaining =
+      0;
+
+  int
+  hoursremaining =
+      0;
+  int
+  minutesremaining =
+      0;
+  int
+  get totaltimestudied =>
+      hoursremaining *
+          3600 +
+      minutesremaining *
+          60 +
+      secondsremaining;
   late int
   selectedBuddy;
   Assestsofbuddy
@@ -75,12 +105,24 @@ class _BodyofchoiceState
         .name: '',
     Assestsofbuddy
         .subject: '',
+    Assestsofbuddy
+        .totaltime: 0,
   };
   String
   currentscreen =
       'maker';
+
+  late Buddyinfo
+  info;
+  //methods
   @override
   void initState() {
+    selectedBuddy =
+        0;
+
+    body =
+        fullbody[0];
+
     info = Buddyinfo(
       name:
           Valuetaking
@@ -88,21 +130,13 @@ class _BodyofchoiceState
       subject:
           subjecttaking
               .text,
+      totaltimestudied:
+          totaltimestudied,
     );
-
-    body =
-        fullbody[0];
-
-    selectedBuddy =
-        0;
-
     super
         .initState();
   }
 
-  late Buddyinfo
-  info;
-  //methods
   void chosenBuddy(
     int newbuddy,
   ) {
@@ -139,7 +173,6 @@ class _BodyofchoiceState
                     body,
                 buddystack:
                     buddystack,
-
                 index:
                     indexofbuddy,
                 chosenAsset:
@@ -152,6 +185,32 @@ class _BodyofchoiceState
                     studdybuddies,
                 info:
                     info,
+                totaltimestudied:
+                    totaltimestudied,
+              ),
+            ),
+      ),
+    );
+  }
+
+  void view(
+    int
+    indexofbuddy,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (
+              context,
+            ) => BuddyContainer(
+              child: Buddyfullinfo(
+                body:
+                    body,
+                buddystack:
+                    buddystack,
+                studdybuddies:
+                    studdybuddies,
               ),
             ),
       ),
@@ -166,33 +225,20 @@ class _BodyofchoiceState
   int screenindex =
       0;
   @override
+  void dispose() {
+    Valuetaking.dispose();
+    subjecttaking
+        .dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(
     BuildContext
     context,
   ) {
     List<Widget>
     widgets = [
-      Timerclass(
-        switchbuddies:
-            chosenBuddy,
-        selectedBuddy:
-            selectedBuddy,
-        studdybuddies:
-            studdybuddies,
-        buddystack:
-            buddystack,
-        body: body,
-      ),
-
-      ///body
-      /// selectedbuddy
-      ///  studdybuddies,
-      ///  switchbuddies,
-      /// indexofbuddy
-      /// chosenasset
-      /// edit
-      /// info
-      ///  buddystack chosenbody
       Buddymakerscreen(
         body: body,
         buddystack:
@@ -208,6 +254,19 @@ class _BodyofchoiceState
         studdybuddies:
             studdybuddies,
         info: info,
+        totaltimestudied:
+            totaltimestudied,
+      ),
+      Timerclass(
+        switchbuddies:
+            chosenBuddy,
+        selectedBuddy:
+            selectedBuddy,
+        studdybuddies:
+            studdybuddies,
+        buddystack:
+            buddystack,
+        body: body,
       ),
       Buddylistandfunctions(
         body: body,
@@ -220,6 +279,9 @@ class _BodyofchoiceState
         as:
             chosenasset,
         i: indexofbuddy,
+        totaltimestudied:
+            totaltimestudied,
+        view: view,
       ),
     ];
 
@@ -228,8 +290,10 @@ class _BodyofchoiceState
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body:
-            widgets[screenindex],
+        body: BuddyContainer(
+          child:
+              widgets[screenindex],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           onTap:
               (
