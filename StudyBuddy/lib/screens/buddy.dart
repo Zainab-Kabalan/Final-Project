@@ -156,6 +156,9 @@ class _BodyofchoiceState
             ),
       ),
     );
+    Navigator.pop(
+      context,
+    );
   }
 
   String? buddyName;
