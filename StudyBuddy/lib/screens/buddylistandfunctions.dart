@@ -71,53 +71,62 @@ class Buddylistandfunctions
     BuildContext
     context,
   ) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...studdybuddies.map((
-              buddystack,
-            ) {
-              return Singlecarddata(
-                info:
-                    info,
-                buddystack:
-                    buddystack,
-                body:
-                    body,
-                edit:
-                    edit,
-                as:
-                    as,
-                i: i,
-                totaltimestudied:
-                    totaltimestudied,
-                view:
-                    view,
-                studdybuddies:
-                    studdybuddies,
-              );
-            }),
-            SizedBox(
-              height:
-                  20,
-              child: ElevatedButton(
-                onPressed: () {
-                  add(
-                    as,
-                    i,
-                    totaltimestudied,
-                    studdybuddies,
-                  );
-                },
-                child: Icon(
-                  Icons.plus_one_rounded,
-                ),
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              ...studdybuddies.map((
+                buddystack,
+              ) {
+                return Singlecarddata(
+                  info:
+                      info,
+                  buddystack:
+                      buddystack,
+                  body:
+                      body,
+                  edit:
+                      edit,
+                  as:
+                      as,
+                  i: i,
+                  totaltimestudied:
+                      totaltimestudied,
+                  view:
+                      view,
+                  studdybuddies:
+                      studdybuddies,
+                );
+              }),
+            ],
+          ),
+        ),
+        Positioned(
+          bottom:
+              25,
+          child: SizedBox(
+            width:
+                40,
+            child: FloatingActionButton(
+              shape:
+                  const CircleBorder(),
+
+              onPressed: () {
+                add(
+                  as,
+                  i,
+                  totaltimestudied,
+                  studdybuddies,
+                );
+              },
+              child: Icon(
+                Icons.add_circle_outline,
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
