@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/models/BuddyInfo/buddyinfo.dart';
@@ -102,7 +103,7 @@ class Singlecarddata
                       fontWeight:
                           FontWeight.bold,
                       fontSize:
-                          25,
+                          20,
                     ),
                   ),
 
@@ -121,9 +122,6 @@ class Singlecarddata
                       ),
                     ),
                   ),
-                  Text(
-                    "Total Hours Studied: ${buddystack[Assestsofbuddy.totaltime] ?? 0} ",
-                  ),
                 ],
               ),
             ],
@@ -138,7 +136,9 @@ class Singlecarddata
                 onPressed: () {
                   edit(
                     as,
-                    buddystack[as],
+                    studdybuddies.indexOf(
+                      buddystack,
+                    ),
                   );
                 },
 

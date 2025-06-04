@@ -23,20 +23,34 @@ class Buddyinacontainer
     BuildContext
     context,
   ) {
-    return Card(
-      child: Container(
-        color:
-            const Color.fromARGB(
-              255,
-              141,
-              139,
-              139,
+    return Padding(
+      padding:
+          const EdgeInsets.fromLTRB(
+            50,
+            15,
+            50,
+            0,
+          ),
+      child: SizedBox(
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.zero,
+          ),
+          child: Container(
+            color: const Color.fromARGB(
+              193,
+              138,
+              220,
+              223,
             ),
-        child: Buddystack(
-          body:
-              body,
-          buddystack:
-              buddystack,
+            child: Buddystack(
+              body:
+                  body,
+              buddystack:
+                  buddystack,
+            ),
+          ),
         ),
       ),
     );

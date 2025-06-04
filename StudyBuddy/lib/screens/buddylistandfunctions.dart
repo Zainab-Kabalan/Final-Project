@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/models/BuddyInfo/buddyinfo.dart';
-import 'package:timer/widgets/buddystack.dart';
 import 'package:timer/widgets/singlecarddata.dart';
 
+// ignore: must_be_immutable
 class Buddylistandfunctions
     extends
         StatelessWidget {
   Buddylistandfunctions({
+    required this.add,
     required this.view,
     required this.totaltimestudied,
     required this.as,
@@ -20,6 +21,7 @@ class Buddylistandfunctions
     required this.edit,
     super.key,
   });
+
   int
   totaltimestudied;
   final Assestsofbuddy
@@ -50,6 +52,20 @@ class Buddylistandfunctions
     >
   >
   studdybuddies;
+  final void
+  Function(
+    Assestsofbuddy,
+    int,
+    int,
+    List<
+      Map<
+        Assestsofbuddy,
+        dynamic
+      >
+    >,
+  )
+  add;
+
   @override
   Widget build(
     BuildContext
@@ -82,6 +98,23 @@ class Buddylistandfunctions
                     studdybuddies,
               );
             }),
+            SizedBox(
+              height:
+                  20,
+              child: ElevatedButton(
+                onPressed: () {
+                  add(
+                    as,
+                    i,
+                    totaltimestudied,
+                    studdybuddies,
+                  );
+                },
+                child: Icon(
+                  Icons.plus_one_rounded,
+                ),
+              ),
+            ),
           ],
         ),
       ),

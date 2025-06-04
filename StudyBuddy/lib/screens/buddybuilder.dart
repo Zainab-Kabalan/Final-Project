@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/models/BuddyInfo/buddyinfo.dart';
@@ -14,6 +17,7 @@ class Buddymakerscreen
     extends
         StatefulWidget {
   Buddymakerscreen({
+    required this.add,
     required this.totaltimestudied,
     required this.info,
     required this.studdybuddies,
@@ -23,10 +27,15 @@ class Buddymakerscreen
     required this.buddystack,
     required this.body,
     required this.index,
-
+    this.editingIndex,
+    required this.popsave,
     super.key,
   });
+  final void
+  Function()
+  popsave;
 
+  int? editingIndex;
   final subjecttaking;
   final Valuetaking;
   final Fullbodyofchoice
@@ -35,6 +44,19 @@ class Buddymakerscreen
   totaltimestudied;
   Assestsofbuddy
   chosenAsset;
+  final void
+  Function(
+    Assestsofbuddy,
+    int,
+    int,
+    List<
+      Map<
+        Assestsofbuddy,
+        dynamic
+      >
+    >,
+  )
+  add;
 
   final Map<
     Assestsofbuddy,
@@ -81,6 +103,95 @@ class _BuddymakerscreenState
         .initState();
   }
 
+  void save(
+    Assestsofbuddy
+    type,
+  ) {
+    setState(() {
+      if (widget
+              .editingIndex !=
+          null) {
+        widget
+            .studdybuddies[widget
+            .editingIndex!] = Map.from(
+          widget
+              .buddystack,
+        );
+      }
+      if (widget
+              .editingIndex ==
+          null) {
+        showDialog(
+          context:
+              context,
+          builder:
+              (
+                context,
+              ) => AlertDialog(
+                title: Text(
+                  '${widget.buddystack[Assestsofbuddy.name]} Created!',
+                ),
+                content: Text(
+                  'Your buddy has been created!',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).pop();
+                    },
+                    child: Text(
+                      'OK',
+                    ),
+                  ),
+                ],
+              ),
+        ).then((_) {
+          Navigator.pop(
+            context,
+            buddy
+                .buddystack,
+          );
+        });
+      } else {
+        showDialog(
+          context:
+              context,
+          builder:
+              (
+                context,
+              ) => AlertDialog(
+                title: Text(
+                  '${widget.buddystack[Assestsofbuddy.name]} Updated!',
+                ),
+                content: Text(
+                  'Your buddy has been updated!',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).pop();
+                    },
+                    child: Text(
+                      'OK',
+                    ),
+                  ),
+                ],
+              ),
+        ).then((_) {
+          Navigator.pop(
+            context,
+            buddy
+                .buddystack,
+          );
+        });
+      }
+    });
+  }
+
   void chosen(
     Assestsofbuddy
     type,
@@ -90,25 +201,6 @@ class _BuddymakerscreenState
       buddy.buddystack[type] =
           index;
     });
-  }
-
-  void save(
-    Assestsofbuddy
-    type,
-  ) {
-    setState(() {
-      widget
-          .studdybuddies
-          .add(
-            Map.from(
-              widget
-                  .buddystack,
-            ),
-          );
-    });
-    Navigator.pop(
-      context,
-    );
   }
 
   void textbuddy(
