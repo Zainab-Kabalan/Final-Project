@@ -70,12 +70,7 @@ class _BodyofchoiceState
       0;
   late Fullbodyofchoice
   body;
-  List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  List<buddy>
   studdybuddies = [
   ];
 
@@ -83,30 +78,8 @@ class _BodyofchoiceState
       TextEditingController();
   final Valuetaking =
       TextEditingController();
-  Map<
-    Assestsofbuddy,
-    dynamic
-  >
-  buddystack = {
-    Assestsofbuddy
-        .accessories: 0,
-    Assestsofbuddy
-        .backhair: 0,
-    Assestsofbuddy
-        .fronthair: 0,
-    Assestsofbuddy
-        .clothes: 0,
-    Assestsofbuddy
-        .eyes: 0,
-    Assestsofbuddy
-        .skin: 0,
-    Assestsofbuddy
-        .name: '',
-    Assestsofbuddy
-        .subject: '',
-    Assestsofbuddy
-        .totaltime: 0,
-  };
+  late buddy
+  buddystack;
   String
   currentscreen =
       'maker';
@@ -116,6 +89,24 @@ class _BodyofchoiceState
   int? editing;
   @override
   void initState() {
+    buddystack =
+        buddy(
+          totaltime:
+              0,
+          Name: '',
+          clothes:
+              0,
+          skin: 0,
+          eyes: 0,
+          accessories:
+              0,
+          fronthair:
+              0,
+          backhair:
+              0,
+          subject:
+              "",
+        );
     selectedBuddy =
         0;
 
@@ -152,7 +143,6 @@ class _BodyofchoiceState
     setState(() {
       selectedBuddy =
           newbuddy;
-      studdybuddies[newbuddy];
     });
   }
 
@@ -182,11 +172,25 @@ class _BodyofchoiceState
                     subjecttaking,
                 chosenAsset:
                     chosenasset,
-                buddystack: Map<
-                  Assestsofbuddy,
-                  dynamic
-                >.from(
-                  studdybuddies[indexofbuddy],
+                buddystack: buddy(
+                  Name:
+                      studdybuddies[indexofbuddy].Name,
+                  totaltime:
+                      studdybuddies[indexofbuddy].totaltime,
+                  clothes:
+                      studdybuddies[indexofbuddy].clothes,
+                  skin:
+                      studdybuddies[indexofbuddy].skin,
+                  eyes:
+                      studdybuddies[indexofbuddy].eyes,
+                  accessories:
+                      studdybuddies[indexofbuddy].accessories,
+                  fronthair:
+                      studdybuddies[indexofbuddy].fronthair,
+                  backhair:
+                      studdybuddies[indexofbuddy].backhair,
+                  subject:
+                      studdybuddies[indexofbuddy].subject,
                 ),
                 body:
                     body,
@@ -195,21 +199,21 @@ class _BodyofchoiceState
                 add:
                     add,
                 editingIndex:
-                    indexofbuddy,
-                popsave:
-                    popsave,
+                    editing,
               ),
             ),
       ),
     );
     setState(() {
-      studdybuddies[indexofbuddy] = Map<
-        Assestsofbuddy,
-        dynamic
-      >.from(
-        editedBuddy,
-      );
+      studdybuddies[indexofbuddy] =
+          editedBuddy;
     });
+    print(
+      studdybuddies[studdybuddies
+                  .length -
+              1]
+          .clothes,
+    );
   }
 
   void view(
@@ -227,7 +231,7 @@ class _BodyofchoiceState
                 body:
                     body,
                 buddystack:
-                    studdybuddies[indexofbuddy],
+                    buddystack,
                 studdybuddies:
                     studdybuddies,
               ),
@@ -275,28 +279,22 @@ class _BodyofchoiceState
                     i,
                 add:
                     add,
-                popsave:
-                    popsave,
               ),
             ),
       ),
     );
 
     setState(() {
-      studdybuddies.add(
-        Map<
-          Assestsofbuddy,
-          dynamic
-        >.from(
-          addBuddy,
-        ),
-      );
+      studdybuddies
+          .add(
+            addBuddy,
+          );
     });
-  }
-
-  void popsave() {
-    Navigator.pop(
-      context,
+    print(
+      studdybuddies[studdybuddies
+                  .length -
+              1]
+          .clothes,
     );
   }
 
@@ -330,8 +328,6 @@ class _BodyofchoiceState
                     totaltimestudied,
                 add:
                     add,
-                popsave:
-                    popsave,
               ),
             ),
       ),
@@ -339,14 +335,10 @@ class _BodyofchoiceState
     if (newBuddy !=
         null) {
       setState(() {
-        studdybuddies.add(
-          Map<
-            Assestsofbuddy,
-            dynamic
-          >.from(
-            buddystack,
-          ),
-        );
+        studdybuddies
+            .add(
+              newBuddy,
+            );
       });
     }
   }

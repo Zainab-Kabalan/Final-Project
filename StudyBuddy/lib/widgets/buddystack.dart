@@ -12,10 +12,7 @@ class Buddystack
   });
   final Fullbodyofchoice
   body;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
+  final buddy
   buddystack;
   @override
   Widget build(
@@ -31,8 +28,8 @@ class Buddystack
           body
               .buddybackhair[Assestsofbuddy
                   .backhair]![0]
-              .backhair[buddystack[Assestsofbuddy
-              .backhair]!],
+              .backhair[buddystack
+              .backhair],
           height:
               200,
           width:
@@ -48,8 +45,8 @@ class Buddystack
           body
               .buddyskin[Assestsofbuddy
                   .skin]![0]
-              .skin[buddystack[Assestsofbuddy
-              .skin]!],
+              .skin[buddystack
+              .skin],
           filterQuality:
               FilterQuality
                   .none,
@@ -65,8 +62,8 @@ class Buddystack
           body
               .buddyclothes[Assestsofbuddy
                   .clothes]![0]
-              .clothes[buddystack[Assestsofbuddy
-              .clothes]!],
+              .clothes[buddystack
+              .clothes],
           height:
               200,
           width:
@@ -82,8 +79,8 @@ class Buddystack
           body
               .buddyeyes[Assestsofbuddy
                   .eyes]![0]
-              .eyes[buddystack[Assestsofbuddy
-              .eyes]!],
+              .eyes[buddystack
+              .eyes],
           height:
               200,
           width:
@@ -99,8 +96,8 @@ class Buddystack
           body
               .buddyfronthair[Assestsofbuddy
                   .fronthair]![0]
-              .fronthair[buddystack[Assestsofbuddy
-              .fronthair]!],
+              .fronthair[buddystack
+              .fronthair],
           height:
               200,
           width:
@@ -117,8 +114,8 @@ class Buddystack
           body
               .buddyaccesories[Assestsofbuddy
                   .accessories]![0]
-              .accesories[buddystack[Assestsofbuddy
-              .accessories]!],
+              .accesories[buddystack
+              .accessories],
           height:
               200,
           width:

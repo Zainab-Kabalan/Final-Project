@@ -13,10 +13,7 @@ class Buddyinacontainer
   });
   final Fullbodyofchoice
   body;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
+  final buddy
   buddystack;
   @override
   Widget build(

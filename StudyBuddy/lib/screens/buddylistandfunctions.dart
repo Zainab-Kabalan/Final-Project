@@ -31,10 +31,7 @@ class Buddylistandfunctions
   info;
   final Fullbodyofchoice
   body;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
+  final buddy
   buddystack;
   final void
   Function(int)
@@ -45,24 +42,14 @@ class Buddylistandfunctions
     int,
   )
   edit;
-  final List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  final List<buddy>
   studdybuddies;
   final void
   Function(
     Assestsofbuddy,
     int,
     int,
-    List<
-      Map<
-        Assestsofbuddy,
-        dynamic
-      >
-    >,
+    List<buddy>,
   )
   add;
 
@@ -77,13 +64,13 @@ class Buddylistandfunctions
           child: Column(
             children: [
               ...studdybuddies.map((
-                buddystack,
+                buddyObj,
               ) {
                 return Singlecarddata(
                   info:
                       info,
                   buddystack:
-                      buddystack,
+                      buddyObj,
                   body:
                       body,
                   edit:

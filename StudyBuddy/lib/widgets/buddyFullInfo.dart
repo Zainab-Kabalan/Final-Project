@@ -15,17 +15,9 @@ class Buddyfullinfo
   });
   final Fullbodyofchoice
   body;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
+  final buddy
   buddystack;
-  final List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  final List<buddy>
   studdybuddies;
 
   @override
@@ -85,7 +77,7 @@ class Buddyfullinfo
               Column(
                 children: [
                   Text(
-                    "Name: ${buddystack[Assestsofbuddy.name]} ",
+                    "Name: ${buddystack.Name} ",
                     style: GoogleFonts.roboto(
                       fontWeight:
                           FontWeight.bold,
@@ -95,7 +87,7 @@ class Buddyfullinfo
                   ),
 
                   Text(
-                    "Subject: ${buddystack[Assestsofbuddy.subject]} ",
+                    "Subject: ${buddystack.subject} ",
                     style: GoogleFonts.roboto(
                       fontWeight:
                           FontWeight.bold,
@@ -110,9 +102,9 @@ class Buddyfullinfo
                       fontSize:
                           20,
                     ),
-                    "Total Hours Studied: ${(buddystack[Assestsofbuddy.totaltime] ~/ 3600).toString().padLeft(2, '0')}:"
-                    "${((buddystack[Assestsofbuddy.totaltime] % 3600) ~/ 60).toString().padLeft(2, '0')}:"
-                    "${(buddystack[Assestsofbuddy.totaltime] % 60).toString().padLeft(2, '0')}",
+                    "Total Hours Studied: ${(buddystack.totaltime ~/ 3600).toString().padLeft(2, '0')}:"
+                    "${((buddystack.totaltime % 3600) ~/ 60).toString().padLeft(2, '0')}:"
+                    "${(buddystack.totaltime % 60).toString().padLeft(2, '0')}",
                   ),
                 ],
               ),

@@ -11,7 +11,7 @@ import 'package:timer/widgets/buddystack.dart';
 class Timerclass
     extends
         StatefulWidget {
-  const Timerclass({
+  Timerclass({
     required this.switchbuddies,
     required this.selectedBuddy,
     required this.studdybuddies,
@@ -26,18 +26,9 @@ class Timerclass
   selectedBuddy;
   final Fullbodyofchoice
   body;
-  final List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  final List<buddy>
   studdybuddies;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
-  buddystack;
+  buddy buddystack;
 
   @override
   State<
@@ -54,7 +45,7 @@ class _timerapp
         State<
           Timerclass
         > {
-  //controllers
+  //contro
   final hourEntered =
       TextEditingController();
   final minEntered =
@@ -120,6 +111,7 @@ class _timerapp
   void initState() {
     super
         .initState();
+    totaltime = 0;
     playcofiti = ConfettiController(
       duration:
           const Duration(
@@ -214,17 +206,18 @@ class _timerapp
         totaltime =
             totaltimebreak +
             totaltimestudied;
-        widget.buddystack[Assestsofbuddy
-                .totaltime] =
-            (widget.buddystack[Assestsofbuddy.totaltime] ??
+        widget
+                .buddystack
+                .totaltime =
+            (widget.buddystack.totaltime ??
                 0) +
             totaltime;
-        widget.studdybuddies[widget
-                .selectedBuddy][Assestsofbuddy
-                .totaltime] =
-            widget
-                .buddystack[Assestsofbuddy
-                .totaltime];
+        widget
+            .studdybuddies[widget
+                .selectedBuddy]
+            .totaltime = (widget
+                .buddystack
+                .totaltime);
       });
     }
   }

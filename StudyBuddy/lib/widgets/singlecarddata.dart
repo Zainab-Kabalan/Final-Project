@@ -27,17 +27,9 @@ class Singlecarddata
   final int i;
   final Fullbodyofchoice
   body;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
+  final buddy
   buddystack;
-  List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  List<buddy>
   studdybuddies;
   final Buddyinfo
   info;
@@ -98,7 +90,7 @@ class Singlecarddata
               Column(
                 children: [
                   Text(
-                    "Name: ${buddystack[Assestsofbuddy.name]} ",
+                    "Name: ${buddystack.Name} ",
                     style: TextStyle(
                       fontWeight:
                           FontWeight.bold,
@@ -108,7 +100,7 @@ class Singlecarddata
                   ),
 
                   Text(
-                    "Subject: ${buddystack[Assestsofbuddy.subject]} ",
+                    "Subject: ${buddystack.subject} ",
                     style: TextStyle(
                       fontSize:
                           15,
@@ -154,7 +146,8 @@ class Singlecarddata
                 onPressed: () {
                   view(
                     studdybuddies.indexOf(
-                      buddystack,
+                      buddystack
+                          as buddy,
                     ),
                   );
                 },

@@ -6,7 +6,7 @@ import 'package:timer/widgets/buddystack.dart';
 class Buddychosingdropdownbutton
     extends
         StatelessWidget {
-  const Buddychosingdropdownbutton({
+  Buddychosingdropdownbutton({
     required this.switchbuddies,
     required this.selectedBuddy,
     required this.studdybuddies,
@@ -22,18 +22,9 @@ class Buddychosingdropdownbutton
   selectedBuddy;
   final Fullbodyofchoice
   body;
-  final List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  final List<buddy>
   studdybuddies;
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
-  buddystack;
+  buddy buddystack;
 
   @override
   Widget build(
@@ -45,10 +36,10 @@ class Buddychosingdropdownbutton
         alignedDropdown:
             true,
         child: DropdownButton<
-          int
+          buddy
         >(
           value:
-              selectedBuddy,
+              studdybuddies[selectedBuddy],
           items:
               List.generate(
                 studdybuddies.length,
@@ -56,15 +47,34 @@ class Buddychosingdropdownbutton
                   index,
                 ) {
                   return DropdownMenuItem<
-                    int
+                    buddy
                   >(
                     value:
-                        index,
+                        studdybuddies[index],
                     child: Buddystack(
                       body:
                           body,
                       buddystack:
-                          studdybuddies[index],
+                          buddystack = buddy(
+                            totaltime:
+                                studdybuddies[index].totaltime,
+                            Name:
+                                studdybuddies[index].Name,
+                            clothes:
+                                studdybuddies[index].clothes,
+                            skin:
+                                studdybuddies[index].skin,
+                            eyes:
+                                studdybuddies[index].eyes,
+                            accessories:
+                                studdybuddies[index].accessories,
+                            fronthair:
+                                studdybuddies[index].fronthair,
+                            backhair:
+                                studdybuddies[index].backhair,
+                            subject:
+                                studdybuddies[index].subject,
+                          ),
                     ),
                   );
                 },
@@ -73,7 +83,9 @@ class Buddychosingdropdownbutton
             selectedBuddy,
           ) {
             switchbuddies(
-              selectedBuddy!,
+              studdybuddies.indexOf(
+                selectedBuddy!,
+              ),
             );
           },
         ),

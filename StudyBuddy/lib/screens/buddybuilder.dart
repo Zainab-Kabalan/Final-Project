@@ -5,7 +5,7 @@ import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/models/BuddyInfo/buddyinfo.dart';
 import 'package:timer/screens/timerclass.dart';
-
+import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/widgets/buddystack.dart';
 import 'package:timer/widgets/buttonscreationbuddy.dart';
 import 'package:timer/widgets/buttonsforassets.dart';
@@ -27,12 +27,7 @@ class Buddymakerscreen
     required this.body,
     required this.index,
     this.editingIndex,
-    required this.popsave,
-    super.key,
   });
-  final void
-  Function()
-  popsave;
 
   int? editingIndex;
   final subjecttaking;
@@ -48,27 +43,14 @@ class Buddymakerscreen
     Assestsofbuddy,
     int,
     int,
-    List<
-      Map<
-        Assestsofbuddy,
-        dynamic
-      >
-    >,
+    List<buddy>,
   )
   add;
 
-  final Map<
-    Assestsofbuddy,
-    dynamic
-  >
+  final buddy
   buddystack;
   final int index;
-  final List<
-    Map<
-      Assestsofbuddy,
-      dynamic
-    >
-  >
+  final List<buddy>
   studdybuddies;
   Buddyinfo info;
   @override
@@ -87,10 +69,10 @@ class _BuddymakerscreenState
   late Timerclass
   time;
   late Buddystack
-  buddy;
+  buddyS;
   @override
   void initState() {
-    buddy = Buddystack(
+    buddyS = Buddystack(
       body:
           widget
               .body,
@@ -106,99 +88,127 @@ class _BuddymakerscreenState
     Assestsofbuddy
     type,
   ) {
-    setState(() {
-      if (widget
-              .editingIndex !=
-          null) {
-        widget
-            .studdybuddies[widget
-            .editingIndex!] = Map.from(
+    final newBuddy = buddy(
+      Name:
           widget
-              .buddystack,
+              .Valuetaking
+              .text,
+      totaltime:
+          widget
+              .totaltimestudied,
+      clothes:
+          widget
+              .buddystack
+              .clothes,
+      skin:
+          widget
+              .buddystack
+              .skin,
+      eyes:
+          widget
+              .buddystack
+              .eyes,
+      accessories:
+          widget
+              .buddystack
+              .accessories,
+      fronthair:
+          widget
+              .buddystack
+              .fronthair,
+      backhair:
+          widget
+              .buddystack
+              .backhair,
+      subject:
+          widget
+              .subjecttaking
+              .text,
+    );
+
+    if (widget
+            .editingIndex !=
+        null) {
+      showDialog(
+        context:
+            context,
+        builder:
+            (
+              context,
+            ) => AlertDialog(
+              title: Text(
+                '${newBuddy.Name} Updated!',
+              ),
+              content: Text(
+                'Your buddy has been updated!',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pop();
+                  },
+                  child: Text(
+                    'OK',
+                  ),
+                ),
+              ],
+            ),
+      ).then((_) {
+        Navigator.pop(
+          context,
+          newBuddy,
         );
-      }
-      if (widget
-              .editingIndex ==
-          null) {
-        showDialog(
-          context:
-              context,
-          builder:
-              (
-                context,
-              ) => AlertDialog(
-                title: Text(
-                  '${widget.buddystack[Assestsofbuddy.name]} Created!',
-                ),
-                content: Text(
-                  'Your buddy has been created!',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(
-                        context,
-                      ).pop();
-                    },
-                    child: Text(
-                      'OK',
-                    ),
-                  ),
-                ],
-              ),
-        ).then((_) {
-          Navigator.pop(
+      });
+    } else {
+      showDialog(
+        context:
             context,
-            buddy
-                .buddystack,
-          );
-        });
-      } else {
-        showDialog(
-          context:
+        builder:
+            (
               context,
-          builder:
-              (
-                context,
-              ) => AlertDialog(
-                title: Text(
-                  '${widget.buddystack[Assestsofbuddy.name]} Updated!',
-                ),
-                content: Text(
-                  'Your buddy has been updated!',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(
-                        context,
-                      ).pop();
-                    },
-                    child: Text(
-                      'OK',
-                    ),
-                  ),
-                ],
+            ) => AlertDialog(
+              title: Text(
+                '${newBuddy.Name} Created!',
               ),
-        ).then((_) {
-          Navigator.pop(
-            context,
-            buddy
-                .buddystack,
-          );
-        });
-      }
-    });
+              content: Text(
+                'Your buddy has been created!',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pop();
+                  },
+                  child: Text(
+                    'OK',
+                  ),
+                ),
+              ],
+            ),
+      ).then((_) {
+        Navigator.pop(
+          context,
+          newBuddy,
+        );
+      });
+    }
   }
 
   void chosen(
     Assestsofbuddy
-    type,
+    chosen,
     int index,
   ) {
     setState(() {
-      buddy.buddystack[type] =
-          index;
+      if (Asset["clothes"] ==
+          chosen) {
+        widget
+            .buddystack
+            .clothes = index;
+      }
     });
   }
 
@@ -220,19 +230,19 @@ class _BuddymakerscreenState
             widget
                 .totaltimestudied,
       );
-      buddy.buddystack[Assestsofbuddy
-              .name] =
-          widget
-              .info
-              .name;
-      buddy.buddystack[Assestsofbuddy
-              .subject] =
-          widget
+      buddyS
+          .buddystack
+          .Name = widget
+              .Valuetaking
+              .text;
+      buddyS
+          .buddystack
+          .subject = widget
               .info
               .subject;
-      buddy.buddystack[Assestsofbuddy
-              .totaltime] =
-          widget
+      buddyS
+          .buddystack
+          .totaltime = widget
               .info
               .totaltimestudied;
     });
