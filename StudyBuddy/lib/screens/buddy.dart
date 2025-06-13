@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:timer/db/buddy-Storage.dart';
 import 'package:timer/models/BuddyAssets/FullbodyOfChoice.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 import 'package:timer/models/BuddyInfo/buddyinfo.dart';
@@ -15,9 +16,11 @@ class Bodyofchoice
     extends
         StatefulWidget {
   const Bodyofchoice({
+    required this.buddies,
     super.key,
   });
-
+  final List<buddy>
+  buddies;
   @override
   State<
     Bodyofchoice
@@ -60,6 +63,8 @@ class _BodyofchoiceState
       minutesremaining *
           60 +
       secondsremaining;
+  bool firsttime =
+      false;
   late int
   selectedBuddy;
   Assestsofbuddy
@@ -123,8 +128,25 @@ class _BodyofchoiceState
       totaltimestudied:
           totaltimestudied,
     );
+    loadBuddies();
+    super
+        .initState();
+  }
+
+  void
+  loadBuddies() async {
+    List<buddy>
+    buddydb =
+        await loadBuddy();
+    setState(() {
+      studdybuddies =
+          buddydb;
+    });
     if (studdybuddies
-        .isEmpty) {
+            .isEmpty &&
+        !firsttime) {
+      firsttime =
+          true;
       WidgetsBinding
           .instance
           .addPostFrameCallback((
@@ -133,8 +155,6 @@ class _BodyofchoiceState
             _showBuddyMaker();
           });
     }
-    super
-        .initState();
   }
 
   void chosenBuddy(
@@ -271,12 +291,30 @@ class _BodyofchoiceState
                     subjecttaking,
                 chosenAsset:
                     as,
-                buddystack:
-                    buddystack,
+                buddystack: buddy(
+                  Name:
+                      studdybuddies[selectedBuddy].Name,
+                  totaltime:
+                      studdybuddies[selectedBuddy].totaltime,
+                  clothes:
+                      studdybuddies[selectedBuddy].clothes,
+                  skin:
+                      studdybuddies[selectedBuddy].skin,
+                  eyes:
+                      studdybuddies[selectedBuddy].eyes,
+                  accessories:
+                      studdybuddies[selectedBuddy].accessories,
+                  fronthair:
+                      studdybuddies[selectedBuddy].fronthair,
+                  backhair:
+                      studdybuddies[selectedBuddy].backhair,
+                  subject:
+                      studdybuddies[selectedBuddy].subject,
+                ),
                 body:
                     body,
                 index:
-                    i,
+                    selectedBuddy,
                 add:
                     add,
               ),
@@ -289,6 +327,9 @@ class _BodyofchoiceState
           .add(
             addBuddy,
           );
+      insertBuddy(
+        addBuddy,
+      );
     });
     print(
       studdybuddies[studdybuddies
@@ -339,6 +380,9 @@ class _BodyofchoiceState
             .add(
               newBuddy,
             );
+        insertBuddy(
+          newBuddy,
+        );
       });
     }
   }

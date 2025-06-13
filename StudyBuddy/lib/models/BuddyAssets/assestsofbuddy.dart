@@ -70,21 +70,24 @@ class buddy {
   >
   get buddystack {
     return {
-      'accessories':
-          accessories,
-      'backhair':
-          backhair,
-      'fronthair':
-          fronthair,
-      'clothes':
-          clothes,
-      'eyes': eyes,
-      'skin': skin,
-      'name': Name,
-      'subject ':
+      'BuddyName':
+          Name,
+      'BuddySubject':
           subject,
-      'totaltime':
+      'BuddyTotalTime':
           totaltime,
+      'BuddyClothes':
+          clothes,
+      'BuddySkin':
+          skin,
+      'BuddyEyes':
+          eyes,
+      'BuddyAccessories':
+          accessories,
+      'BuddyFrontHair':
+          fronthair,
+      'BuddyBackHair':
+          backhair,
     };
   }
 }

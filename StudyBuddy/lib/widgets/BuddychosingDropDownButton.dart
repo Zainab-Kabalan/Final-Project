@@ -55,26 +55,7 @@ class Buddychosingdropdownbutton
                       body:
                           body,
                       buddystack:
-                          buddystack = buddy(
-                            totaltime:
-                                studdybuddies[index].totaltime,
-                            Name:
-                                studdybuddies[index].Name,
-                            clothes:
-                                studdybuddies[index].clothes,
-                            skin:
-                                studdybuddies[index].skin,
-                            eyes:
-                                studdybuddies[index].eyes,
-                            accessories:
-                                studdybuddies[index].accessories,
-                            fronthair:
-                                studdybuddies[index].fronthair,
-                            backhair:
-                                studdybuddies[index].backhair,
-                            subject:
-                                studdybuddies[index].subject,
-                          ),
+                          studdybuddies[index],
                     ),
                   );
                 },
@@ -82,11 +63,14 @@ class Buddychosingdropdownbutton
           onChanged: (
             selectedBuddy,
           ) {
-            switchbuddies(
-              studdybuddies.indexOf(
-                selectedBuddy!,
-              ),
-            );
+            if (selectedBuddy !=
+                null) {
+              switchbuddies(
+                studdybuddies.indexOf(
+                  selectedBuddy,
+                ),
+              );
+            }
           },
         ),
       ),

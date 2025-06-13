@@ -17,7 +17,7 @@ class Buddydb {
             db,
             version,
           ) => db.execute(
-            'CREATE TABLE Buddy( BuddyName Text PRIMARY KEY AUTOINCREMENT, BuddySubject TEXT,BuddyTotalTime INTEGER, BuddyClothes INTEGER, BuddySkin INTEGER, BuddyEyes INTEGER, BuddyAccessories INTEGER, BuddyFrontHair INTEGER, BuddyBackHair INTEGER)',
+            'CREATE TABLE buddy( BuddyName Text PRIMARY KEY , BuddySubject TEXT,BuddyTotalTime INTEGER, BuddyClothes INTEGER, BuddySkin INTEGER, BuddyEyes INTEGER, BuddyAccessories INTEGER, BuddyFrontHair INTEGER, BuddyBackHair INTEGER)',
           ),
       version: 1,
     );

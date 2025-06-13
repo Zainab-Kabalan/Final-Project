@@ -1,7 +1,7 @@
 import 'package:timer/db/buddydb.dart';
 import 'package:timer/models/BuddyAssets/assestsofbuddy.dart';
 
-void insertExpense(
+void insertBuddy(
   buddy buddy,
 ) async {
   Buddydb database =
@@ -17,7 +17,7 @@ void insertExpense(
 }
 
 Future<List<buddy>>
-loadExpenses() async {
+loadBuddy() async {
   Buddydb database =
       Buddydb();
   final db =
